@@ -1,3 +1,4 @@
+using System.Collections;
 using meta;
 using entity;
 
@@ -9,6 +10,7 @@ namespace item
         public abstract Importance GetImportance();
         public abstract Dimension GetDimension();
         public abstract double GetDurability();
+        
         
     }
 }

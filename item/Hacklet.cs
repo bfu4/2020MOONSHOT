@@ -3,23 +3,41 @@
  * the main user interface tablet thing 
  */
 
+using System.Collections.Generic;
 using entity;
+using item.ui;
 using meta;
+using render.client;
 
 namespace item
 {
-    class Hacklet : TabletBase
+    public class Hacklet : TabletBase
     {
+        private readonly List<FunctionalInterface> _interfaces;
         private readonly Importance _importance;
         private readonly Dimension _dimension;
-        private const double Durability = 300d;
         private readonly Entity _entity;
+        
+        private const double Durability = 300d;
         
         public Hacklet(Dimension d, Importance i, Entity e) : base(d, i, true, true, Durability, true)
         {
             _dimension = d;
             _importance = i;
             _entity = e;
+            _interfaces = InstantiatedInterfaces();
+        }
+
+        private List<FunctionalInterface> InstantiatedInterfaces()
+        {
+            List<FunctionalInterface> list = new List<FunctionalInterface>();
+            list.Add(new JourneyInterface(this));
+            return list;
+        }
+
+        public List<FunctionalInterface> GetUIInterfaces()
+        {
+            return _interfaces;
         }
 
         public override void OnHold()

@@ -1,7 +1,10 @@
 
 using System;
 using System.Collections.Generic;
+using api;
+
 using UnityTemplateProjects;
+using Random = System.Random;
 
 namespace entity
 {
@@ -13,6 +16,8 @@ namespace entity
         public SimpleCameraController controller;
         private readonly List<Hand> _hands = new List<Hand>();
         private readonly Inventory _inventory;
+        private readonly double _healthpoints;
+        protected string registryname = "base_entity";
 
         // a basic entity constructor
         public Entity()
@@ -20,7 +25,14 @@ namespace entity
             uUID = GenerateUUID();
             // default size of inventory is 10
             _inventory = new Inventory();
+            _healthpoints = 0;
         }
+
+        public Entity(double hp)
+        {
+            _healthpoints = hp;
+        }
+        
 
         // constructor with camera
         public Entity(SimpleCameraController c) : this()
@@ -63,6 +75,30 @@ namespace entity
         public Inventory GetInventory()
         {
             return _inventory;
+        }
+
+        public bool Die()
+        {
+            try
+            {
+                TryToKill();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(registryname + " failed to die.");
+            }
+
+            return true;
+        }
+
+        private void TryToKill()
+        {
+            if (_healthpoints != 0)
+            {
+                throw new EntityDeathException();
+            }
+            // do something
+            
         }
     }
 }

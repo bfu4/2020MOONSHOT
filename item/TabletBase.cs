@@ -3,7 +3,7 @@ using meta;
 
 namespace item 
 {
-    abstract class TabletBase : DroppableItem
+    public abstract class TabletBase : DroppableItem
     {
         private readonly Dimension dimension;
         private readonly Importance importance;

@@ -131,7 +131,7 @@ namespace UnityTemplateProjects
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
-
+            
             // Unlock and show cursor when right mouse button released
             if (Input.GetMouseButtonUp(1))
             {

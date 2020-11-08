@@ -1,6 +1,6 @@
 ﻿namespace item
 {
-    abstract class DroppableItem : Item
+    public abstract class DroppableItem : Item
     {
         private readonly bool _despawnable;
         public abstract bool Despawn();
