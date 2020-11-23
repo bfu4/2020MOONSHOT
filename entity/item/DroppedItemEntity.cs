@@ -6,7 +6,7 @@ namespace entity.item
     {
         public DroppedItemEntity()
         {
-            registryname = "item_entity_base";
+            Registryname = "item_entity_base";
         }
         public abstract bool OnContact(Entity e);
         

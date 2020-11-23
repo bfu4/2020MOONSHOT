@@ -1,24 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEngine;
+using Object = System.Object;
 
 namespace render.client
 {
     public class FunctionalInterface
     {
-        private readonly Object parent;
+        protected readonly Object Parent;
+        protected readonly string Description;
+        protected Dictionary<Int32, Texture2D> Textures = new Dictionary<int, Texture2D>();
 
-        public FunctionalInterface()
+        public FunctionalInterface(Object e, string desc)
         {
-            
+            Parent = e;
+            Description = desc;
         }
-
-        public FunctionalInterface(Object e)
+        
+        public Dictionary<Int32, Texture2D> GetTextures()
         {
-            parent = e;
+            return Textures;
+        }
+        public string GetDescription()
+        {
+            return Description;
         }
 
         public Object GetParent()
         {
-            return parent;
+            return Parent;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace entity
         // UUID must be set on construction
         public readonly string uUID;
         // camera for entities that require cameras.. sigh
-        public SimpleCameraController controller;
+        private UnityEngine.Camera _camera;
         private readonly List<Hand> _hands = new List<Hand>();
         private readonly Inventory _inventory;
-        private readonly double _healthpoints;
-        protected string registryname = "base_entity";
+        private double _healthpoints;
+        protected string Registryname = "base_entity";
 
         // a basic entity constructor
         public Entity()
@@ -35,9 +35,14 @@ namespace entity
         
 
         // constructor with camera
-        public Entity(SimpleCameraController c) : this()
+        public Entity(UnityEngine.Camera c) : this()
         {
-            controller = c;
+            _camera = c;
+        }
+
+        public UnityEngine.Camera GetCamera()
+        {
+            return _camera;
         }
 
         // generate unique id
@@ -77,25 +82,33 @@ namespace entity
             return _inventory;
         }
 
+        public void SetHealthpoints(double d)
+        {
+            _healthpoints = d;
+        }
         public bool Die()
         {
             try
             {
-                TryToKill();
+                NaturalKill();
             }
             catch (Exception e)
             {
-                Console.WriteLine(registryname + " failed to die.");
+                Console.WriteLine(e.Message);
             }
-
             return true;
         }
 
-        private void TryToKill()
+        public string GetRegistryName()
+        {
+            return Registryname;
+        }
+
+        private void NaturalKill()
         {
             if (_healthpoints != 0)
             {
-                throw new EntityDeathException(); // too early!
+                throw new EntityDeathException(Registryname + "@" + uUID + "does not have sufficient health points for a natural death."); // too early!
             }
             // do something
             
