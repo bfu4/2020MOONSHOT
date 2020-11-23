@@ -95,7 +95,7 @@ namespace entity
         {
             if (_healthpoints != 0)
             {
-                throw new EntityDeathException();
+                throw new EntityDeathException(); // too early!
             }
             // do something
             

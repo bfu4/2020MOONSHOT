@@ -1,9 +1,12 @@
-using UnityEngine;
 
 namespace gamevent
 {
-    class OpenInterfaceEvent
+    public class OpenInterfaceEvent
     {
-        
+        public OpenInterfaceEvent(item.TabletBase i)
+        {
+            i.GetInterfaces(); // render
+        }
+
     }
 }

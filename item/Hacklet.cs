@@ -13,7 +13,6 @@ namespace item
 {
     public class Hacklet : TabletBase
     {
-        private readonly List<FunctionalInterface> _interfaces;
         private readonly Importance _importance;
         private readonly Dimension _dimension;
         private readonly Entity _entity;
@@ -25,19 +24,12 @@ namespace item
             _dimension = d;
             _importance = i;
             _entity = e;
-            _interfaces = InstantiatedInterfaces();
+            _interfaces = new List<FunctionalInterface>();
         }
 
-        private List<FunctionalInterface> InstantiatedInterfaces()
+        public Hacklet(Dimension d, Importance i, Entity e, List<FunctionalInterface> interfaces) : this(d, i, e)
         {
-            List<FunctionalInterface> list = new List<FunctionalInterface>();
-            list.Add(new JourneyInterface(this));
-            return list;
-        }
-
-        public List<FunctionalInterface> GetUIInterfaces()
-        {
-            return _interfaces;
+            _interfaces = interfaces;
         }
 
         public override void OnHold()

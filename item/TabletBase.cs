@@ -1,16 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 using meta;
+using render.client;
 
 namespace item 
 {
     public abstract class TabletBase : DroppableItem
     {
-        private readonly Dimension dimension;
-        private readonly Importance importance;
-        private readonly bool playerRestricted;
-        private readonly bool holdable;
-        private double durability;
-        private readonly bool _despawnable;
+        protected readonly Dimension dimension;
+        protected readonly Importance importance;
+        protected readonly bool playerRestricted;
+        protected readonly bool holdable;
+        protected double durability;
+        protected readonly bool _despawnable;
+        protected List<FunctionalInterface> _interfaces;
+
         public TabletBase(Dimension d, Importance i, bool playerOnly, bool canBeHeld, double db, bool candespawn) : base(candespawn)
         {
             dimension = d;
@@ -19,6 +23,16 @@ namespace item
             holdable = canBeHeld;
             durability = db;
             _despawnable = candespawn;
+        }
+
+        public void AddInterface(FunctionalInterface i)
+        {
+            _interfaces.Add(i);
+        }
+
+        public List<FunctionalInterface> GetInterfaces()
+        {
+            return _interfaces;
         }
 
         public abstract void OnHold();
